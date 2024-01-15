@@ -9,11 +9,6 @@
  */
 package me.chachoox.lithium.impl.modules.movement.nofall;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import me.chachoox.lithium.api.module.Category;
 import me.chachoox.lithium.api.module.Module;
 import me.chachoox.lithium.api.property.EnumProperty;
